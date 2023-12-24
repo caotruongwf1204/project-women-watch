@@ -1,0 +1,14 @@
+.swiper-button-prev,
+.swiper-button-next {
+    color: #868686;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+@media (max-width: 640px) {
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none;
+    }
+}

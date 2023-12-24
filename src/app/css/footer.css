@@ -1,0 +1,11 @@
+.fload {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, 0) 100%);
+}
+.page {
+    background-image: url('/slider-1.jpg');
+    background-size: 100% auto;
+    background-position: center;
+}
+.btn {
+    
+}

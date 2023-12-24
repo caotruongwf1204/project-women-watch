@@ -1,0 +1,140 @@
+.header {
+    border-bottom: 1px solid #eaeaea;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+
+
+.logo {
+    width: 170px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-container {
+    margin: 0 75px;
+    padding: 0 15px;
+}
+
+.header-search {
+    width: 600px;
+    height: 45px;
+    border-radius: 30px;
+    padding: 8px;
+    background: #eee;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-input {
+    color: #000;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 600px;
+    height: 100%;
+    padding: 1px 2px 1px 10px;
+}
+
+.search-btn {
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    color: #000;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 20px;
+}
+
+.account {
+    position: relative;
+}
+
+.user-dropdown {
+    background-color: #fff;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    z-index: 9999;
+    opacity: 0;
+    box-shadow: 0 0 7px 0.5px rgba(0, 0, 0, .15);
+    transform: rotateX(90deg);
+    transform-origin: center top 0;
+    transition: all .5s ease 0s;
+    visibility: hidden;
+}
+
+.user-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: rotatey(0);
+}
+
+.account-link {
+    font-size: 13px;
+    width: 125px;
+    transition: all .3s ease 0s;
+    font-weight: 600;
+}
+
+.account-link:hover {
+    padding-left: 5px;
+}
+
+
+
+
+
+
+@media (max-width: 1024px) {
+    .header {
+        height: 53px;
+        padding: 0;
+    }
+
+    .header-container {
+        margin: 0;
+    }
+
+    .menu-mobile-toggle {
+        display: flex;
+    }
+
+    .header-search {
+        display: none;
+    }
+
+    .user {
+        display: none;
+    }
+
+    .link-logo {
+        width: 100px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header-fixed {
+    z-index: 999;
+    border: none;
+    background-color: #fff;
+    position: fixed;
+    top: -40px;
+    width: 100%;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 7px 0.5px rgba(0, 0, 0, .15);
+}
+}
