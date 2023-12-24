@@ -13,7 +13,7 @@ interface MenuMobileProps {
 export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
   const [submenus, setSubmenus] = useState([false, false, false]);
 
-  const submenuToggle = (index) => {
+  const submenuToggle = (index: number): void => {
     setSubmenus((prevSubmenus) =>
       prevSubmenus.map((submenu, i) => (i === index ? !submenu : false))
     );
