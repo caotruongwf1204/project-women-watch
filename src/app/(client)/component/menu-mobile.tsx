@@ -5,7 +5,12 @@ import "@/app/css/menu-mobile.css";
 import { TfiClose } from "react-icons/tfi";
 import { useState } from "react";
 
-export default function MenuMobile({ isOpen, onClose }) {
+interface MenuMobileProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
   const [submenus, setSubmenus] = useState([false, false, false]);
 
   const submenuToggle = (index) => {
