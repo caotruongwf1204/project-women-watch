@@ -1,19 +1,17 @@
-'use client';
+"use client";
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { FaRegUserCircle } from "react-icons/fa";
-import { BsBagCheck } from "react-icons/bs";
+import { PiUserCircleThin } from "react-icons/pi";
+import { PiShoppingBagThin } from "react-icons/pi";
 import { IoIosHeartEmpty } from "react-icons/io";
 import NextImage from "next/image";
 import { GoChevronDown } from "react-icons/go";
 import "@/app/css/navigation.css";
 
-
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isUserDropdown, setUserDropdown] = useState(false);
-
 
   const toggleUserDropdown = () => {
     setUserDropdown(!isUserDropdown);
@@ -32,10 +30,18 @@ export default function Navigation() {
   }, []);
 
   return (
-    <main className={`${isScrolled ? 'scrolled' : ''} navbar flex items-center justify-center`}>
+    <main
+      className={`${
+        isScrolled ? "scrolled" : ""
+      } navbar flex items-center justify-center`}
+    >
       <div className="container">
-        <div className={`row flex items-center justify-center ${isScrolled ? 'main-menu' : ''}`}>
-          <div className={`nav-logo ${isScrolled ? 'visible' : ''}`}>
+        <div
+          className={`row flex items-center justify-center ${
+            isScrolled ? "main-menu" : ""
+          }`}
+        >
+          <div className={`nav-logo ${isScrolled ? "visible" : ""}`}>
             <Link className="link logo" href={"/"}>
               <NextImage
                 width={170}
@@ -84,25 +90,35 @@ export default function Navigation() {
               BÀI VIẾT <GoChevronDown />
             </Link>
           </div>
-          <div className={`nav-icons flex gap-3 text-xl ${isScrolled ? 'visible' : ''}`}>
-          <div className="account" onClick={toggleUserDropdown}>
-            <button className="user">
-              <FaRegUserCircle />
-            </button>
-            <div className={`user-dropdown ${isUserDropdown ? "active" : ""}`}>
-              <ul className="p-2">
-                <li className="account-link"><Link href={""}>Đăng nhập</Link></li>
-                <li className="account-link"><Link href={""}>Đăng ký</Link></li>
-              </ul>
+          <div
+            className={`nav-icons flex gap-3 text-xl ${
+              isScrolled ? "visible" : ""
+            }`}
+          >
+            <div className="account" onClick={toggleUserDropdown}>
+              <button className="user">
+                <PiUserCircleThin />
+              </button>
+              <div
+                className={`user-dropdown ${isUserDropdown ? "active" : ""}`}
+              >
+                <ul className="p-2">
+                  <li className="account-link">
+                    <Link href={""}>Đăng nhập</Link>
+                  </li>
+                  <li className="account-link">
+                    <Link href={""}>Đăng ký</Link>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
 
             <Link href={""}>
               <IoIosHeartEmpty />
             </Link>
 
             <Link href={""}>
-              <BsBagCheck />
+              <PiShoppingBagThin />
             </Link>
           </div>
         </div>

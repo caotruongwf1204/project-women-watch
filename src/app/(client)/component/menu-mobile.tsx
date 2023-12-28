@@ -23,8 +23,8 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
       <div className="bg-mobile w-full absolute h-full" onClick={onClose}></div>
 
       <div className="menu-mobile-show absolute overflow-y-auto">
-        <span className="close-btn" onClick={onClose}>
-          <TfiClose />
+        <span className="close-btn">
+          <TfiClose onClick={onClose}/>
         </span>
         <div className="mobile-search">
           <form className="mobile-search-form">
@@ -41,7 +41,7 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
         <div className="mobile-navigation">
           <ul>
             <li className="font-medium py-1">
-              <Link href={"/"}>Trang chủ</Link>
+              <Link href={"/"} onClick={onClose}>Trang chủ</Link>
             </li>
             <li className="py-1">
               <div className="flex justify-between">
@@ -49,6 +49,7 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
                   className="font-medium"
                   color="foreground"
                   href="/collection"
+                  onClick={onClose}
                 >
                   ĐỒNG HỒ
                 </Link>
@@ -77,6 +78,7 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
                   className="flex justify-between font-medium"
                   href="/accessory"
                   aria-current="page"
+                  onClick={onClose}
                 >
                   PHỤ KIỆN
                 </Link>
@@ -99,7 +101,8 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
                 <Link
                   className="flex justify-between font-medium"
                   color="foreground"
-                  href="/collection"
+                  href="/"
+                  onClick={onClose}
                 >
                   Bài viết
                 </Link>
@@ -118,7 +121,7 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
               </ul>
             </li>
             <li className="font-medium py-1">
-              <Link href={"/"}>Đăng nhập/Đăng ký</Link>
+              <Link href={"/"} onClick={onClose}>Đăng nhập/Đăng ký</Link>
             </li>
           </ul>
         </div>

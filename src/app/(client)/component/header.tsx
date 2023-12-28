@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { CiSearch } from "react-icons/ci";
 import NextImage from "next/image";
-import { FaRegUserCircle } from "react-icons/fa";
-import { BsBagCheck } from "react-icons/bs";
+import { PiUserCircleThin } from "react-icons/pi";
+import { PiShoppingBagThin } from "react-icons/pi";
 import "@/app/css/header.css";
 import { MdOutlineMenu } from "react-icons/md";
 import MenuMobile from "./menu-mobile";
@@ -45,7 +45,7 @@ export default function Header() {
   return (
     <header className="header flex items-center justify-center pt-3">
       <div
-        className={`header-container container flex items-center justify-between ${
+        className={`header-container flex items-center justify-between ${
           isHeaderFixed ? "header-fixed" : ""
         }`}
       >
@@ -74,8 +74,8 @@ export default function Header() {
 
         <div className="header-icons flex gap-3 text-2xl">
           <div className="account" onClick={toggleUserDropdown}>
-            <button className="user">
-              <FaRegUserCircle />
+            <button className="user flex items-center justify-center">
+            <PiUserCircleThin />
             </button>
             <div className={`user-dropdown ${isUserDropdown ? "active" : ""}`}>
               <ul className="p-2">
@@ -85,8 +85,8 @@ export default function Header() {
             </div>
           </div>
 
-          <Link href={""}>
-            <BsBagCheck />
+          <Link className="flex items-center justify-center" href={""}>
+          <PiShoppingBagThin />
           </Link>
 
           <div className="menu-mobile-toggle hidden" onClick={toggleMenu}>

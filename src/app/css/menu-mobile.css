@@ -32,11 +32,16 @@ body {
 }
 
 .mobile-search {
-    padding-left: 10px;
+    padding: 0 10px;
+}
+.mobile-search-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mobile-input-search {
-    width: 90%;
+    width: 100%;
     color: #000;
     border: 0;
     outline: 0;
@@ -44,6 +49,8 @@ body {
     height: 45px;
     padding: 1px 2px 1px 10px
 }
+
+
 
 .mobile-input-search:focus {
     background-color: #fff;
@@ -61,6 +68,7 @@ body {
 }
 
 .close-btn {
+    width: 100%;
     padding: 10px;
     display: flex;
     justify-content: flex-end;

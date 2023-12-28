@@ -10,7 +10,6 @@ export default function ClientLayout({
 }) {
   return (
     <>
-
       <Header></Header>
       <Navigation></Navigation>
       <main>{children}</main>
