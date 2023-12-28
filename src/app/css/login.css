@@ -1,0 +1,12 @@
+.btn {
+    color: rgb(184, 184, 184);
+}
+
+.btn.active {
+    border-bottom: 1px solid #545454;
+}
+
+.btn:hover {
+    border-bottom: 1px solid #545454;
+    color: rgb(0, 0, 0);
+}
