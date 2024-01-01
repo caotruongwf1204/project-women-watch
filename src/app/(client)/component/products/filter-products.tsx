@@ -5,26 +5,19 @@ import "@/app/css/filter-products.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-
-
-
-
 export default function FilterProducts() {
   const [isWidget, setWidget] = useState([false, false]);
-
+  const currentUrl: string= window.location.pathname;
 
   const handleClick = (index: number): void => {
     setWidget((prevWidget) =>
       prevWidget.map((widget, i) => (i === index ? !widget : false))
     );
-
   };
 
   useEffect(() => {
-    setWidget([window.location.pathname === "/collection", window.location.pathname === "/accessory"]);
-  }, [window.location.pathname]);
-
-  
+    setWidget([currentUrl === "/collection", currentUrl === "/accessory"]);
+  }, [currentUrl]);
 
   return (
     <div className="lg:w-3/12 px-3 filter-widget">
@@ -48,7 +41,6 @@ export default function FilterProducts() {
             <div className="shop-widget-check" onClick={() => handleClick(0)}>
               <span className={`check ${isWidget[0] ? "active" : ""}`}></span>
               <Link href={"/collection"}>ĐỒNG HỒ</Link>
-              
             </div>
           </li>
           <li className="mb-3" onClick={() => handleClick(1)}>
