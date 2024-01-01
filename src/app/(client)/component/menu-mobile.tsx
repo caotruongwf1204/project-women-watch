@@ -121,7 +121,7 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
               </ul>
             </li>
             <li className="font-medium py-1">
-              <Link href={"/"} onClick={onClose}>Đăng nhập/Đăng ký</Link>
+              <Link href={"/login"} onClick={onClose}>Đăng nhập/Đăng ký</Link>
             </li>
           </ul>
         </div>
