@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import "@/app/css/login.css";
 import { useForm, SubmitHandler  } from "react-hook-form";
@@ -14,11 +16,11 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = data => console.log(data);
   return (
     <div className="login-main flex items-center justify-center py-24">
       <div className="container text-center">
-        <div className="login-btn font-semibold">
+        <div className="login-btn font-semibold mb-10">
           <button className="btn px-3">
             <Link href={"/login"}>Đăng nhập</Link>
           </button>
@@ -26,17 +28,17 @@ export default function LoginForm() {
             <Link href={"/register"}>Đăng ký</Link>
           </button>
         </div>
-        <div className="login-form">
+        <div className="login-form-main flex items-center justify-center">
           <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control">
-              <label className="login-label">Email</label>
               <input
                 className="login-input"
+                placeholder="Nhập số điện thoại"
                 {...register("email", {
-                  required: "Email is required",
+                  required: "Trường này không được để trống",
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email address",
+                    message: "Địa chỉ email không hợp lệ",
                   },
                 })}
                 type="text"
@@ -45,15 +47,15 @@ export default function LoginForm() {
             </div>
 
             <div className="form-control">
-              <label className="login-label">Password</label>
               <input
                 className="login-input"
+                placeholder="Nhập mật khẩu"
                 {...register("password", {
-                  required: "Password is required",
+                  required: "Trường này không được để trống",
                   pattern: {
                     value: /^(?=.*[A-Z])(?=.*[a-zA-Z0-9]).{8,}$/,
                     message:
-                      "Password must be at least 8 characters long, with the first letter in uppercase and a combination of letters and numbers.",
+                      "Mật khẩu phải dài ít nhất 8 ký tự, chữ cái đầu tiên viết hoa và kết hợp cả chữ và số.",
                   },
                 })}
                 type="password"
@@ -63,7 +65,7 @@ export default function LoginForm() {
 
             <div className="login-btn">
               <button className="btn-submit" type="submit">
-                Login
+              ĐĂNG NHẬP
               </button>
             </div>
           </form>

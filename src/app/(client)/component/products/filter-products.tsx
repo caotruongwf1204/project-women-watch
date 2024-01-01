@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 
-interface FilterProductsProps {
-  selectedCategory: string;
-}
 
-export default function FilterProducts({selectedCategory}: FilterProductsProps) {
+
+
+export default function FilterProducts() {
   const [isWidget, setWidget] = useState([false, false]);
+
 
   const handleClick = (index: number): void => {
     setWidget((prevWidget) =>
@@ -21,8 +21,9 @@ export default function FilterProducts({selectedCategory}: FilterProductsProps) 
   };
 
   useEffect(() => {
-    setWidget([selectedCategory === "ĐỒNG HỒ", selectedCategory === "PHỤ KIỆN"]);
-  }, [selectedCategory]);
+    setWidget([window.location.pathname === "/collection", window.location.pathname === "/accessory"]);
+  }, [window.location.pathname]);
+
   
 
   return (
