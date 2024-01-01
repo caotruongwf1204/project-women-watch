@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function FilterProducts() {
   const [isWidget, setWidget] = useState([false, false]);
-  const currentUrl: string= window.location.pathname;
+  const currentUrl = typeof window !== "undefined" ? window.location.pathname : "";
 
   const handleClick = (index: number): void => {
     setWidget((prevWidget) =>
