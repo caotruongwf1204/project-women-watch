@@ -4,6 +4,7 @@
 
 .btn.active {
     border-bottom: 1px solid #545454;
+    color: #000000;
 }
 
 .btn:hover {
@@ -17,6 +18,11 @@
     width: 100%;
     box-shadow: 0 0 7px 0.5px rgba(0, 0, 0, .15);
     padding: 80px;
+    display: none;
+}
+
+.login-form.active {
+    display: block;
 }
 
 .form-control {

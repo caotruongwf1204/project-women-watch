@@ -79,8 +79,8 @@ export default function Header() {
             </button>
             <div className={`user-dropdown ${isUserDropdown ? "active" : ""}`}>
               <ul className="p-2">
-                <li className="account-link"><Link href={"/login"}>Đăng nhập</Link></li>
-                <li className="account-link"><Link href={"/register"}>Đăng ký</Link></li>
+                <li className="account-link"><Link className="w-full" href={"/login"}>Đăng nhập</Link></li>
+                <li className="account-link"><Link className="w-full" href={"/register"}>Đăng ký</Link></li>
               </ul>
             </div>
           </div>
