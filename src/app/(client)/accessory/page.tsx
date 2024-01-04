@@ -23,7 +23,7 @@ export default async function Accessory() {
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-2">
               {products.map(( product: any ) => (
                 <Link key={product.id} href={`/products/${product.id}`}>
-                  <ProductCart key={product.id} {...product}></ProductCart>
+                  <ProductCart key={product.idProductCart} {...product}></ProductCart>
                 </Link>
               ))}
             </div>
