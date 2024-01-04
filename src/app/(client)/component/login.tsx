@@ -25,7 +25,7 @@ export default function LoginForm() {
 
   const handleClick = (index: number): void => {
     setLogin((prevLogin) =>
-      prevLogin.map((login, i) => (i === index ? !login : false))
+      prevLogin.map((login, i) => (i === index ? true : false))
     );
   };
 
@@ -61,18 +61,18 @@ export default function LoginForm() {
               <input
                 className="login-input"
                 placeholder="Nhập số điện thoại"
-                {...register("email", {
+                {...register("number", {
                   required: "Trường này không được để trống",
                   pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Địa chỉ email không hợp lệ",
+                    value: /^(?:(\d)(?!\1{9})){10}$/,
+                    message: "Số điện thoại không hợp lệ",
                   },
                 })}
-                type="text"
+                type="tel"
               />
-              {errors.email && (
+              {errors.number && (
                 <span className="text-red-500 flex items-center justify-start">
-                  {errors.email.message}
+                  {errors.number.message}
                 </span>
               )}
             </div>

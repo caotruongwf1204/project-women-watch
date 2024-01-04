@@ -51,9 +51,10 @@ export default function Header() {
       >
         <Link className="link-logo" href={"/"}>
           <NextImage
+          priority={true}
             width={170}
             height={100}
-            className="w-full h-auto object-cover img-logo"
+            className="object-cover"
             alt="logo"
             src="/logo.webp"
           />

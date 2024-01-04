@@ -11,7 +11,7 @@ export default function FilterProducts() {
 
   const handleClick = (index: number): void => {
     setWidget((prevWidget) =>
-      prevWidget.map((widget, i) => (i === index ? !widget : false))
+      prevWidget.map((widget, i) => (i === index ? true : false))
     );
   };
 
