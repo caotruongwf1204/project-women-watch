@@ -4,13 +4,7 @@ import { listProducts } from "../service/product.service";
 import ProductCart from "../component/product-card";
 import Link from "next/link";
 
-interface AccessoryProp {
-  product: Product;
-}
 
-interface Product {
-  id: any;
-}
 
 export default async function Accessory() {
   const products = await listProducts();
@@ -27,7 +21,7 @@ export default async function Accessory() {
           <div className="lg:w-9/12 px-5 w-full">
             <Selection></Selection>
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-2">
-              {products.map((product:AccessoryProp) => (
+              {products.map(( product: any ) => (
                 <Link key={product.id} href={`/products/${product.id}`}>
                   <ProductCart key={product.id} {...product}></ProductCart>
                 </Link>
