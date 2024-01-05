@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
-
+import NextImage from "next/image";
 
 export default function ProductCart(product: any) {
   return (
@@ -10,12 +10,11 @@ export default function ProductCart(product: any) {
         <h4 className="font-bold text-large">{product.title}</h4>
       </CardHeader>
       <CardBody className="overflow-visible py-2">
-        <Image
+      <Image
           alt="Card background"
-          className="object-cover rounded-xl overflow-hidden aspect-square"
+          className="object-cover rounded-xl"
           src={product.thumbnail}
           width={270}
-          height={270}
         />
       </CardBody>
     </Card>
