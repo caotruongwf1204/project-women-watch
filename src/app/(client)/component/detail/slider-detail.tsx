@@ -7,14 +7,14 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { Navigation, Thumbs } from "swiper/modules";
+import { Navigation, Thumbs, Swiper as SwiperType } from "swiper/modules";
 
 interface SliderDetailProps {
   item: string[];
 }
 
 export default function SliderDetail({ item }: SliderDetailProps) {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   return (
     <div className="slider-container">
