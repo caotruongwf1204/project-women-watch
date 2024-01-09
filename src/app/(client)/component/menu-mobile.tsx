@@ -10,7 +10,7 @@ interface MenuMobileProps {
   onClose: () => void;
 }
 
-export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
+export default function MenuMobile({ isOpen, onClose }: MenuMobileProps) {
   const [submenus, setSubmenus] = useState([false, false, false]);
 
   const submenuToggle = (index: number): void => {
@@ -24,7 +24,7 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
 
       <div className="menu-mobile-show absolute overflow-y-auto">
         <span className="close-btn">
-          <TfiClose onClick={onClose}/>
+          <TfiClose onClick={onClose} />
         </span>
         <div className="mobile-search">
           <form className="mobile-search-form">
@@ -41,7 +41,9 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
         <div className="mobile-navigation">
           <ul>
             <li className="font-medium py-1">
-              <Link href={"/"} onClick={onClose}>Trang chủ</Link>
+              <Link href={"/"} onClick={onClose}>
+                Trang chủ
+              </Link>
             </li>
             <li className="py-1">
               <div className="flex justify-between">
@@ -57,7 +59,9 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
                   className="flex items-center justify-center submenu-toggle"
                   onClick={() => submenuToggle(0)}
                 >
-                  <GoChevronDown />
+                  <GoChevronDown
+                    className={`icon-mobile ${submenus[0] ? "active" : ""}`}
+                  />
                 </span>
               </div>
               <ul
@@ -87,7 +91,7 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
                   className="flex items-center justify-center submenu-toggle"
                   onClick={() => submenuToggle(1)}
                 >
-                  <GoChevronDown />
+                  <GoChevronDown className={`icon-mobile ${submenus[1] ? "active" : ""}`}/>
                 </span>
               </div>
               <ul
@@ -110,7 +114,7 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
                   className="flex items-center justify-center submenu-toggle"
                   onClick={() => submenuToggle(2)}
                 >
-                  <GoChevronDown />
+                  <GoChevronDown className={`icon-mobile ${submenus[2] ? "active" : ""}`}/>
                 </span>
               </div>
               <ul
@@ -121,7 +125,9 @@ export default function MenuMobile({ isOpen, onClose }:MenuMobileProps) {
               </ul>
             </li>
             <li className="font-medium py-1">
-              <Link href={"/login"} onClick={onClose}>Đăng nhập/Đăng ký</Link>
+              <Link href={"/login"} onClick={onClose}>
+                Đăng nhập/Đăng ký
+              </Link>
             </li>
           </ul>
         </div>

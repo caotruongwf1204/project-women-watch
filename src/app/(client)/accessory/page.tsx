@@ -1,7 +1,7 @@
 import FilterProducts from "../component/products/filter-products";
 import Selection from "../component/products/selection";
 import { listAccessory } from "../service/product.service";
-import ProductCart from "../component/product-card";
+import ProductCart from "../component/products/product-card";
 import Link from "next/link";
 
 
@@ -22,9 +22,9 @@ export default async function Accessory() {
             <Selection></Selection>
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-2">
               {products.map((product: any) => (
-                <Link key={product.id} href={`/products/${product.id}`}>
+                <Link key={product.id} href={`/accessory/${product.id}`}>
                   <ProductCart
-                    key={product.idProductCart}
+                    key={product.id}
                     {...product}
                   ></ProductCart>
                 </Link>

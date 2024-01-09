@@ -34,6 +34,7 @@ body {
 .mobile-search {
     padding: 0 10px;
 }
+
 .mobile-search-form {
     display: flex;
     align-items: center;
@@ -67,6 +68,14 @@ body {
     background-color: #eee;
 }
 
+.icon-mobile {
+ transition: 0.3s;
+}
+
+.icon-mobile.active {
+    transform: rotate(-180deg)
+}
+
 .close-btn {
     width: 100%;
     padding: 10px;
@@ -74,6 +83,7 @@ body {
     justify-content: flex-end;
     font-size: 26px;
 }
+
 .submenu-mobile {
     max-height: 0;
     overflow: hidden;
@@ -84,8 +94,6 @@ body {
     max-height: 500px;
     transition: max-height 0.3s ease-in-out;
 }
-
-
 
 
 @media (max-width: 425px) {

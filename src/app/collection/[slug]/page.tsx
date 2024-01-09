@@ -1,8 +1,9 @@
 import { getProductById } from "@/app/(client)/service/product.service";
-import { Image } from "@nextui-org/react";
-import NextImage from "next/image";
+import "@/app/css/products-detail.css";
+import SliderDetail from "@/app/(client)/component/detail/slider-detail";
+import ProductInfo from "@/app/(client)/component/detail/product-info";
 
-export const generateMetadata = async ({ params }:any) => {
+export const generateMetadata = async ({ params }: any) => {
   const { slug } = params;
   const product = await getProductById(slug);
   return {
@@ -12,21 +13,25 @@ export const generateMetadata = async ({ params }:any) => {
   };
 };
 
-export default async function Product({ params }:any) {
+export default async function Product({ params }: any) {
   const { slug } = params;
   const product = await getProductById(slug);
 
   return (
-    <main className="product-page">
-      <Image
-        as={NextImage}
-        alt="Card background"
-        className="object-cover rounded-xl overflow-hidden aspect-square"
-        src={product.thumbnail}
-        width={270}
-        height={270}
-      />
-      <p>{product.title}</p>
-    </main>
+    <>
+      <div className="flex justify-center items-center py-4 bg-gray-100">
+        <span className="text-center">{product.title}</span>
+      </div>
+      <div className="product-detail flex items-center justify-center pt-9 pb-10 px-4">
+        <div className="container flex item-center justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+            <div className="w-full">
+              <SliderDetail item={product.image}></SliderDetail>
+            </div>
+            <ProductInfo product={product}></ProductInfo>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

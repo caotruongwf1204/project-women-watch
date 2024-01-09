@@ -4,7 +4,7 @@ import Navigation from "../(client)/component/navigation";
 
 
 
-export default function ClientLayout({
+export default function ProductsLayout({
   children,
 }: {
   children: React.ReactNode;
