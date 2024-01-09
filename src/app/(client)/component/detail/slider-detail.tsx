@@ -7,7 +7,10 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { Navigation, Thumbs, Swiper as SwiperType } from "swiper/modules";
+import { Navigation, Thumbs } from "swiper/modules";
+import SwiperCore, { Swiper as SwiperType } from "swiper/core";
+
+SwiperCore.use([Navigation, Thumbs]);
 
 interface SliderDetailProps {
   item: string[];
