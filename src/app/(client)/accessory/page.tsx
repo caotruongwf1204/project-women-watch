@@ -20,7 +20,7 @@ export default async function Accessory() {
           <FilterProducts></FilterProducts>
           <div className="lg:w-9/12 px-5 w-full">
             <Selection></Selection>
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
               {products.map((product: any) => (
                 <Link key={product.id} href={`/accessory/${product.id}`}>
                   <ProductCart
