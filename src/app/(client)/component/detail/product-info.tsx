@@ -1,10 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import { cartActions } from "@/app/lib/features/cart.slide";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
+
 
 export default function ProductInfo({ product }: any) {
   const [quantity, setQuantity] = useState(1);
   const [activeColor, setActiveColor] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (product.color.length > 0 && !activeColor) {
+      setActiveColor(product.color[0]);
+    }
+  }, [product.color, activeColor]);
 
   const handleMinus = () => {
     if (quantity > 1) {
@@ -18,6 +29,17 @@ export default function ProductInfo({ product }: any) {
 
   const handleColorClick = (color: string) => {
     setActiveColor(color);
+  };
+
+  const handleAddToCart = () => {
+    dispatch(cartActions.addToCart({
+      id: product.id,
+      thumbnail: product.thumbnail,
+      title: product.title,
+      price: product.price,
+      quantity,
+      color: activeColor,
+    }));
   };
 
 
@@ -76,7 +98,7 @@ export default function ProductInfo({ product }: any) {
       </div>
 
       <div className="add-to-cart grid gap-4 mt-6">
-        <button className="btn-add-to-cart">THÊM VÀO GIỎ HÀNG</button>
+        <button onClick={handleAddToCart} className="btn-add-to-cart">THÊM VÀO GIỎ HÀNG</button>
         <button className="btn-buy-now">MUA NGAY</button>
       </div>
     </div>

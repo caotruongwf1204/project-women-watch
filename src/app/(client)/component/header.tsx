@@ -9,11 +9,40 @@ import "@/app/css/header.css";
 import { MdOutlineMenu } from "react-icons/md";
 import MenuMobile from "./menu-mobile";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+
+interface CartItem {
+  id: number;
+  thumbnail: string;
+  title: string;
+  price: number;
+  quantity: number;
+}
+
+interface RootState {
+  cart: {
+    items: CartItem[];
+  };
+}
 
 export default function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isHeaderFixed, setHeaderFixed] = useState(false);
   const [isUserDropdown, setUserDropdown] = useState(false);
+
+  const [search, setSearch] = useState("");
+  const router = useRouter();
+
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    router.push(`/search?q=${search.trim()}`);
+  };
+
+  const cartItems: CartItem[] = useSelector(
+    (state: RootState) => state.cart.items
+  );
+  const totalItem = cartItems.length;
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -51,7 +80,7 @@ export default function Header() {
       >
         <Link className="link-logo" href={"/"}>
           <NextImage
-          priority={true}
+            priority={true}
             width={170}
             height={100}
             className="object-cover"
@@ -61,11 +90,13 @@ export default function Header() {
         </Link>
 
         <div className="header-search">
-          <form className="search-form">
+          <form onSubmit={handleSearch} className="search-form">
             <input
               className="search-input"
               type="text"
               placeholder="Tìm kiếm..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
             <button className="search-btn" type="submit">
               <CiSearch />
@@ -76,18 +107,30 @@ export default function Header() {
         <div className="header-icons flex gap-3 text-2xl">
           <div className="account" onClick={toggleUserDropdown}>
             <button className="user flex items-center justify-center">
-            <PiUserCircleThin />
+              <PiUserCircleThin />
             </button>
             <div className={`user-dropdown ${isUserDropdown ? "active" : ""}`}>
               <ul className="p-2">
-                <li className="account-link"><Link className="w-full" href={"/login"}>Đăng nhập</Link></li>
-                <li className="account-link"><Link className="w-full" href={"/register"}>Đăng ký</Link></li>
+                <li className="account-link">
+                  <Link className="w-full" href={"/login"}>
+                    Đăng nhập
+                  </Link>
+                </li>
+                <li className="account-link">
+                  <Link className="w-full" href={"/register"}>
+                    Đăng ký
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
 
-          <Link className="flex items-center justify-center" href={""}>
-          <PiShoppingBagThin />
+          <Link
+            className="cart-icon flex items-center justify-center"
+            href={"/cart"}
+          >
+            <PiShoppingBagThin />
+            <span className="cart-change">{totalItem}</span>
           </Link>
 
           <div className="menu-mobile-toggle hidden" onClick={toggleMenu}>

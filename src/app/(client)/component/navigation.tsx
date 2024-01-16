@@ -8,10 +8,29 @@ import { IoIosHeartEmpty } from "react-icons/io";
 import NextImage from "next/image";
 import { GoChevronDown } from "react-icons/go";
 import "@/app/css/navigation.css";
+import { useSelector } from "react-redux";
+
+interface CartItem {
+  id: number;
+  thumbnail: string;
+  title: string;
+  price: number;
+  quantity: number;
+}
+
+interface RootState {
+  cart: {
+    items: CartItem[];
+  };
+}
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isUserDropdown, setUserDropdown] = useState(false);
+  const cartItems: CartItem[] = useSelector(
+    (state: RootState) => state.cart.items
+  );
+  const totalItem = cartItems.length;
 
   const toggleUserDropdown = () => {
     setUserDropdown(!isUserDropdown);
@@ -61,13 +80,31 @@ export default function Navigation() {
             >
               ĐỒNG HỒ <GoChevronDown />
               <ul className="submenu">
-                <li>Bee</li>
-                <li>wonderland</li>
-                <li>Classic</li>
-                <li>Celestial</li>
-                <li>Rainbow</li>
-                <li>Floral</li>
-                <li>Sports Luxe</li>
+                <li className="p-2">
+                  <Link href={`/collection?category=bee`}>Bee</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=wonderland`}>
+                    Wonderland
+                  </Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=classic`}>Classic</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=celestial`}>Celestial</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=rainbow`}>Rainbow</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=floral`}>Floral</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=sports luxe`}>
+                    Sports Luxe
+                  </Link>
+                </li>
               </ul>
             </Link>
 
@@ -104,10 +141,10 @@ export default function Navigation() {
               >
                 <ul className="p-2">
                   <li className="account-link">
-                    <Link href={""}>Đăng nhập</Link>
+                    <Link href={"/login"}>Đăng nhập</Link>
                   </li>
                   <li className="account-link">
-                    <Link href={""}>Đăng ký</Link>
+                    <Link href={"/register"}>Đăng ký</Link>
                   </li>
                 </ul>
               </div>
@@ -117,8 +154,9 @@ export default function Navigation() {
               <IoIosHeartEmpty />
             </Link>
 
-            <Link href={""}>
+            <Link className="cart-icon" href={"/cart"}>
               <PiShoppingBagThin />
+              <span className="cart-change">{totalItem}</span>
             </Link>
           </div>
         </div>

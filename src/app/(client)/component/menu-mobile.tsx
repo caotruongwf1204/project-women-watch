@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import { CiSearch } from "react-icons/ci";
 import { GoChevronDown } from "react-icons/go";
@@ -67,13 +69,27 @@ export default function MenuMobile({ isOpen, onClose }: MenuMobileProps) {
               <ul
                 className={`px-2 submenu-mobile ${submenus[0] ? "active" : ""}`}
               >
-                <li className="p-2">Bee</li>
-                <li className="p-2">wonderland</li>
-                <li className="p-2">Classic</li>
-                <li className="p-2">Celestial</li>
-                <li className="p-2">Rainbow</li>
-                <li className="p-2">Floral</li>
-                <li className="p-2">Sports Luxe</li>
+                <li className="p-2">
+                  <Link href={`/collection?category=bee`}>Bee</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=wonderland`}>Wonderland</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=classic`}>Classic</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=celestial`}>Celestial</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=rainbow`}>Rainbow</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=floral`}>Floral</Link>
+                </li>
+                <li className="p-2">
+                  <Link href={`/collection?category=sports luxe`}>Sports Luxe</Link>
+                </li>
               </ul>
             </li>
             <li className="py-1">
@@ -91,7 +107,9 @@ export default function MenuMobile({ isOpen, onClose }: MenuMobileProps) {
                   className="flex items-center justify-center submenu-toggle"
                   onClick={() => submenuToggle(1)}
                 >
-                  <GoChevronDown className={`icon-mobile ${submenus[1] ? "active" : ""}`}/>
+                  <GoChevronDown
+                    className={`icon-mobile ${submenus[1] ? "active" : ""}`}
+                  />
                 </span>
               </div>
               <ul
@@ -114,7 +132,9 @@ export default function MenuMobile({ isOpen, onClose }: MenuMobileProps) {
                   className="flex items-center justify-center submenu-toggle"
                   onClick={() => submenuToggle(2)}
                 >
-                  <GoChevronDown className={`icon-mobile ${submenus[2] ? "active" : ""}`}/>
+                  <GoChevronDown
+                    className={`icon-mobile ${submenus[2] ? "active" : ""}`}
+                  />
                 </span>
               </div>
               <ul
