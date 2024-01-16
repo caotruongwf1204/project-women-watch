@@ -23,17 +23,17 @@
 }
 
 .mySwiper2 {
-    height: 650px;
+    max-height: 650px;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
+.slider-container .swiper-button-prev,
+.slider-container .swiper-button-next {
     width: 40px;
     height: 40px;
 }
 
-.swiper-button-prev::after,
-.swiper-button-next::after {
+.slider-container .swiper-button-prev::after,
+.slider-container .swiper-button-next::after {
     color: black;
     font-size: 20px;
     background-color: rgb(179, 179, 179);
@@ -46,8 +46,8 @@
     transition: all 0.3s linear;
 }
 
-.swiper-button-prev:hover::after,
-.swiper-button-next:hover::after {
+.slider-container .swiper-button-prev:hover::after,
+.slider-container .swiper-button-next:hover::after {
     color: white;
     background-color: black;
 }

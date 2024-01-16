@@ -4,8 +4,8 @@ import { listProducts } from "../service/product.service";
 import ProductCart from "../component/products/product-card";
 import Link from "next/link"
 
-export default async function Collection() {
-  const products = await listProducts();
+export default async function Collection({ params }: { params: { category: string } }) {
+  const products = await listProducts(params.category);
 
   console.log(products);
   return (

@@ -1,5 +1,7 @@
-export const listProducts = async () => {
-  const res = await fetch("https://api-product-watch.vercel.app/watch");
+export const listProducts = async (category: any) => {
+  const res = await fetch(`https://api-product-watch.vercel.app/watch${
+    category ? `?category=${category}` : ""
+  }`);
   const json = await res.json();
 
   return json;
