@@ -14,19 +14,10 @@ interface CartState {
   items: CartItem[];
 }
 
-
-const getLocalStorage = (): CartState => {
-  return JSON.parse(localStorage.getItem("cart") || "null") || { items: [] };
-};
-
-const saveLocalStorage = (cart: CartState) => {
-  localStorage.setItem("cart", JSON.stringify(cart));
-};
-
 const cartSlice = createSlice({
   name: "cart",
   reducerPath: "cart",
-  initialState: getLocalStorage(),
+  initialState: { items: [] } as CartState,
   reducers: {
     addToCart(state, action: PayloadAction<CartItem>) {
       const existingItem = state.items.find(
@@ -40,12 +31,10 @@ const cartSlice = createSlice({
         state.items.push(action.payload);
       }
       toast.success("Đã thêm sản phẩm vào giỏ hàng.");
-      saveLocalStorage(state);
     },
     removeItem(state, action: PayloadAction<{ id: number }>) {
       state.items = state.items.filter((item) => item.id !== action.payload.id);
       toast.success("Đã xóa khỏi giỏ hàng.");
-      saveLocalStorage(state);
     },
     updateQuantity(
       state,
@@ -56,11 +45,9 @@ const cartSlice = createSlice({
           ? { ...item, quantity: action.payload.quantity }
           : item
       );
-      saveLocalStorage(state);
     },
     clearCart(state) {
       state.items = [];
-      saveLocalStorage(state);
     },
   },
 });
