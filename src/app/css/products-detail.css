@@ -18,10 +18,6 @@
     background-color: rgba(255, 87, 34, .1);
 }
 
-.swiper-wrapper {
-    margin-top: 40px;
-}
-
 .mySwiper2 {
     max-height: 650px;
 }
@@ -44,6 +40,7 @@
     height: 100%;
     cursor: pointer;
     transition: all 0.3s linear;
+    margin: 0;
 }
 
 .slider-container .swiper-button-prev:hover::after,

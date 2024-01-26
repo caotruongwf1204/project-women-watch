@@ -2,17 +2,28 @@ import FilterProducts from "../component/products/filter-products";
 import Selection from "../component/products/selection";
 import { listProducts } from "../service/product.service";
 import ProductCart from "../component/products/product-card";
-import Link from "next/link"
+import Link from "next/link";
 
-export default async function Collection({ params }: { params: { category: string } }) {
-  
-  const products = await listProducts(params.category);
-
-  console.log(params.category);
+export default async function Collection({
+  searchParams,
+}: {
+  searchParams: { category: string; sort: string; price_lte: string };
+}) {
+  const products = await listProducts(
+    searchParams.category,
+    searchParams.price_lte,
+    searchParams.sort
+  );
+  console.log(products);
+  console.log(searchParams);
   return (
     <>
       <div className="flex justify-center items-center py-4 bg-gray-100">
-        <span>ĐỒNG HỒ</span>
+        {searchParams.category ? (
+          <span className="uppercase">&quot;{searchParams.category}&quot;</span>
+        ) : (
+          <span className="uppercase">ĐỒNG HỒ</span>
+        )}
       </div>
       <div className="flex items-center justify-center">
         <div className="container flex  py-24">

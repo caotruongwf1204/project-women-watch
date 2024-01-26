@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { CiSearch } from "react-icons/ci";
@@ -6,6 +6,8 @@ import { GoChevronDown } from "react-icons/go";
 import "@/app/css/menu-mobile.css";
 import { TfiClose } from "react-icons/tfi";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { IoMdSearch } from "react-icons/io";
 
 interface MenuMobileProps {
   isOpen: boolean;
@@ -14,6 +16,14 @@ interface MenuMobileProps {
 
 export default function MenuMobile({ isOpen, onClose }: MenuMobileProps) {
   const [submenus, setSubmenus] = useState([false, false, false]);
+
+  const [search, setSearch] = useState("");
+  const router = useRouter();
+
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    router.push(`/search?q=${search.trim()}`);
+  };
 
   const submenuToggle = (index: number): void => {
     setSubmenus((prevSubmenus) =>
@@ -29,13 +39,15 @@ export default function MenuMobile({ isOpen, onClose }: MenuMobileProps) {
           <TfiClose onClick={onClose} />
         </span>
         <div className="mobile-search">
-          <form className="mobile-search-form">
+          <form onSubmit={handleSearch} className="mobile-search-form">
             <input
               className="mobile-input-search"
               type="text"
               placeholder="Tìm kiếm..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
-            <button className="search-btn p-1" type="submit">
+            <button onClick={onClose} className="search-btn p-1" type="submit">
               <CiSearch />
             </button>
           </form>
@@ -67,13 +79,16 @@ export default function MenuMobile({ isOpen, onClose }: MenuMobileProps) {
                 </span>
               </div>
               <ul
+                onClick={onClose}
                 className={`px-2 submenu-mobile ${submenus[0] ? "active" : ""}`}
               >
                 <li className="p-2">
                   <Link href={`/collection?category=bee`}>Bee</Link>
                 </li>
                 <li className="p-2">
-                  <Link href={`/collection?category=wonderland`}>Wonderland</Link>
+                  <Link href={`/collection?category=wonderland`}>
+                    Wonderland
+                  </Link>
                 </li>
                 <li className="p-2">
                   <Link href={`/collection?category=classic`}>Classic</Link>
@@ -88,7 +103,9 @@ export default function MenuMobile({ isOpen, onClose }: MenuMobileProps) {
                   <Link href={`/collection?category=floral`}>Floral</Link>
                 </li>
                 <li className="p-2">
-                  <Link href={`/collection?category=sports luxe`}>Sports Luxe</Link>
+                  <Link href={`/collection?category=sports luxe`}>
+                    Sports Luxe
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -113,9 +130,14 @@ export default function MenuMobile({ isOpen, onClose }: MenuMobileProps) {
                 </span>
               </div>
               <ul
+                onClick={onClose}
                 className={`px-2 submenu-mobile ${submenus[1] ? "active" : ""}`}
               >
-                <li className="p-2">Apple Watch Strap</li>
+                <li className="p-2">
+                  <Link href={`/accessory?category=apple watch strap`}>
+                    Apple Watch Strap
+                  </Link>
+                </li>
               </ul>
             </li>
             <li className="py-1">

@@ -1,23 +1,29 @@
 "use client";
 
+import { userActions } from "@/app/lib/features/user.slide";
 import Link from "next/link";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 interface FormData {
   email: string;
   password: string;
   name: string;
-  number: string;
+  number: number;
 }
 
 export default function CartUser() {
-  const {
+  const dispatch = useDispatch();
+  const { 
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data);
+    dispatch(userActions.setFormData(data));
+  };
 
   return (
     <div className="w-full">
@@ -66,7 +72,10 @@ export default function CartUser() {
             )}
           </div>
           <div className="">
-            <button className="btn-submit w-full py-5 text-center bg-black text-white" type="submit">
+            <button
+              className="btn-submit w-full py-5 text-center bg-black text-white"
+              type="submit"
+            >
               TẠO ĐƠN HÀNG
             </button>
           </div>

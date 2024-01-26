@@ -73,4 +73,8 @@
     .cart-title {
         width: auto !important;
     }
+
+    .total-item {
+        display: grid;
+    }
 }

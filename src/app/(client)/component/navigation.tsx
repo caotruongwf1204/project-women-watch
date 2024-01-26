@@ -92,7 +92,7 @@ export default function Navigation() {
                   <Link href={`/collection?category=classic`}>Classic</Link>
                 </li>
                 <li className="p-2">
-                  <Link href={`/collection?category=celestial`}>Celestial</Link>
+                  <Link href={`/collection?category=selestial`}>Selestial</Link>
                 </li>
                 <li className="p-2">
                   <Link href={`/collection?category=rainbow`}>Rainbow</Link>
@@ -115,7 +115,11 @@ export default function Navigation() {
             >
               PHỤ KIỆN <GoChevronDown />
               <ul className="submenu">
-                <li>Apple Watch Strap</li>
+                <li>
+                  <Link href={`/accessory?category=apple watch strap`}>
+                    Apple Watch Strap
+                  </Link>
+                </li>
               </ul>
             </Link>
 

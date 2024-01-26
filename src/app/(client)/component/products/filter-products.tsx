@@ -4,10 +4,19 @@ import { CiSearch } from "react-icons/ci";
 import "@/app/css/filter-products.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function FilterProducts() {
   const [isWidget, setWidget] = useState([false, false]);
   const currentUrl = typeof window !== "undefined" ? window.location.pathname : "";
+
+  const [search, setSearch] = useState("");
+  const router = useRouter();
+
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    router.push(`/search?q=${search.trim()}`);
+  };
 
   const handleClick = (index: number): void => {
     setWidget((prevWidget) =>
@@ -23,11 +32,13 @@ export default function FilterProducts() {
     <div className="lg:w-3/12 px-3 filter-widget">
       <h1 className="text-2xl font-normal">Tìm kiếm</h1>
       <div className="shop-search mt-6 mb-12">
-        <form className="shop-search-form flex p-3">
+        <form onSubmit={handleSearch} className="shop-search-form flex p-3">
           <input
             className="shop-search-input"
             type="text"
             placeholder="Tìm kiếm..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <button className="shop-search-btn" type="submit">
             <CiSearch />
