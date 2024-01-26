@@ -16,18 +16,21 @@ interface CartState {
   items: CartItem[];
 }
 
-const getLocalStorage = (): CartState => {
-  return JSON.parse(localStorage.getItem("cart") || "null") || { items: [] };
+const CART_LOCAL_STORAGE_KEY = "cart";
+
+const loadCartFromLocalStorage = (): CartState | undefined => {
+  const storedCart = localStorage.getItem(CART_LOCAL_STORAGE_KEY);
+  return storedCart ? JSON.parse(storedCart) : undefined;
 };
 
-const saveLocalStorage = (cart: CartState) => {
-  localStorage.setItem("cart", JSON.stringify(cart));
+const saveCartToLocalStorage = (state: CartState): void => {
+  localStorage.setItem(CART_LOCAL_STORAGE_KEY, JSON.stringify(state));
 };
 
 const cartSlice = createSlice({
   name: "cart",
   reducerPath: "cart",
-  initialState: getLocalStorage,
+  initialState: loadCartFromLocalStorage() || { items: [] },
   reducers: {
     addToCart(state, action: PayloadAction<CartItem>) {
       const existingItem = state.items.find(
@@ -41,12 +44,13 @@ const cartSlice = createSlice({
         state.items.push(action.payload);
       }
       toast.success("Đã thêm sản phẩm vào giỏ hàng.");
-      saveLocalStorage(state);
+      saveCartToLocalStorage(state);
     },
     removeItem(state, action: PayloadAction<{ id: number }>) {
       state.items = state.items.filter((item) => item.id !== action.payload.id);
       toast.success("Đã xóa khỏi giỏ hàng.");
-      saveLocalStorage(state);
+      saveCartToLocalStorage(state);
+
     },
     updateQuantity(
       state,
@@ -57,11 +61,12 @@ const cartSlice = createSlice({
           ? { ...item, quantity: action.payload.quantity }
           : item
       );
-      saveLocalStorage(state);
+      saveCartToLocalStorage(state);
+
     },
     clearCart(state) {
       state.items = [];
-      saveLocalStorage(state);
+      saveCartToLocalStorage(state);
     },
   },
 });

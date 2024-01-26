@@ -6,7 +6,6 @@ import "@/app/css/products-detail.css";
 import { HiTrash } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "@/app/lib/features/cart.slide";
-import { divider } from "@nextui-org/react";
 import Link from "next/link";
 
 interface CartItem {
