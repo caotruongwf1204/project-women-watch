@@ -4,6 +4,14 @@ import { Providers } from "./providerUi";
 import StoreProvider from "./lib/features/StoreProvier";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import { store } from "./lib/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+
+
+let persistor = persistStore(store);
+
 
 export const metadata: Metadata = {
   title: "Đồng hồ nữ Olivia Burton-Phân phối chính thức",
@@ -19,13 +27,15 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <StoreProvider>{children}</StoreProvider>
+          <Provider store={store}>
+            <PersistGate persistor={persistor}>{children}</PersistGate>
+          </Provider>
         </Providers>
         <ToastContainer
-        pauseOnHover={false}
-        pauseOnFocusLoss={false}
-        newestOnTop
-      ></ToastContainer>
+          pauseOnHover={false}
+          pauseOnFocusLoss={false}
+          newestOnTop
+        ></ToastContainer>
       </body>
     </html>
   );
