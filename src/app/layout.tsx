@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providerUi";
-import StoreProvider from "./lib/features/StoreProvier";
+// import StoreProvider from "./lib/features/StoreProvier";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
