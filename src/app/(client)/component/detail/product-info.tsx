@@ -10,7 +10,7 @@ export default function ProductInfo({ product }: any) {
   const [quantity, setQuantity] = useState(1);
   const [activeColor, setActiveColor] = useState("");
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     if (product.color.length > 0 && !activeColor) {
       setActiveColor(product.color[0]);
@@ -28,20 +28,26 @@ export default function ProductInfo({ product }: any) {
   };
 
   const handleColorClick = (color: string) => {
-    setActiveColor(color);
+    if (product.color.includes(color)) {
+      setActiveColor(color);
+      dispatch(cartActions.updateColor({ id: product.id, color }));
+    }
   };
 
   const handleAddToCart = () => {
-    dispatch(cartActions.addToCart({
-      id: product.id,
-      thumbnail: product.thumbnail,
-      title: product.title,
-      price: product.price,
-      quantity,
-      color: activeColor,
-    }));
+    dispatch(
+      cartActions.addToCart({
+        id: product.id,
+        thumbnail: product.thumbnail,
+        title: product.title,
+        price: product.price,
+        quantity,
+        color: activeColor,
+      })
+    );
   };
 
+  
 
   const formattedPrice = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -53,7 +59,10 @@ export default function ProductInfo({ product }: any) {
   }).format(product.sale);
   return (
     <div className="product-info ml-24">
-      <h1 className="font-normal text-2xl">{product.title}{activeColor && `- ${activeColor}`}</h1>
+      <h1 className="font-normal text-2xl">
+        {product.title}
+        {activeColor && `- ${activeColor}`}
+      </h1>
 
       <div className="product-price">
         <span className="text-red-500 text-2xl">{formattedSale}</span>
@@ -66,10 +75,18 @@ export default function ProductInfo({ product }: any) {
         <p className="text-gray-600 font-medium">{product.promotion}</p>
 
         <div className="flex">
-        {product.color.map((color: string, index: number) => (
-            <button className={`btn-color mr-2 ${activeColor === color ? 'active' : ''}`} onClick={() => handleColorClick(color)} key={index}>{color}</button>
-            ))}
-            </div>
+          {product.color.map((color: string, index: number) => (
+            <button
+              className={`btn-color mr-2 ${
+                activeColor === color ? "active" : ""
+              }`}
+              onClick={() => handleColorClick(color)}
+              key={index}
+            >
+              {color}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="product-quantity mt-5">
@@ -98,7 +115,9 @@ export default function ProductInfo({ product }: any) {
       </div>
 
       <div className="add-to-cart grid gap-4 mt-6">
-        <button onClick={handleAddToCart} className="btn-add-to-cart">THÊM VÀO GIỎ HÀNG</button>
+        <button onClick={handleAddToCart} className="btn-add-to-cart">
+          THÊM VÀO GIỎ HÀNG
+        </button>
         <button className="btn-buy-now">MUA NGAY</button>
       </div>
     </div>

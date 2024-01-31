@@ -1,26 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { cartReducer, cartSlice } from "./features/cart.slide";
 import { userReducer, userSlice } from "./features/user.slide";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { combineReducers } from "redux";
 
-const persistConfig = {
-  key: 'root',
-  version: 1,
-  storage,
-}
-const reducer = combineReducers({
-  cart: cartReducer,
-  user: userReducer,
-});
+export const makeStore = () => {
+  return configureStore({
+    reducer: {
+      [cartSlice.name]: cartReducer,
+      [userSlice.name]: userReducer,
+    },
+  });
+};
 
-const persistedReducer = persistReducer(persistConfig, reducer);
-
-export const store = configureStore({
-  reducer: persistedReducer,
-});
-
-export type AppStore = ReturnType<typeof store.dispatch>;
-export type RootState = ReturnType<typeof store.getState>;
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
