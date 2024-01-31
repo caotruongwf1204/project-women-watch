@@ -16,18 +16,21 @@ interface CartState {
   items: CartItem[];
 }
 
-const getLocalStorage = (): CartState => {
-  return JSON.parse(localStorage.getItem("cart") || "null") || { items: [] };
-};
+const isClient = typeof window !== "undefined";
 
-const saveLocalStorage = (cart: CartState) => {
-  localStorage.setItem("cart", JSON.stringify(cart));
-};
+const getLocalStorage = isClient
+  ? JSON.parse(localStorage.getItem("cart") || "null") || [] : [];
+
+  const saveLocalStorage = (state: CartState) => {
+    if (isClient) {
+      localStorage.setItem("cart", JSON.stringify(state.items));
+    }
+  };
 
 const cartSlice = createSlice({
   name: "cart",
   reducerPath: "cart",
-  initialState: getLocalStorage(),
+  initialState: { items: getLocalStorage } as CartState,
   reducers: {
     addToCart(state, action: PayloadAction<CartItem>) {
       const existingItem = state.items.find(
