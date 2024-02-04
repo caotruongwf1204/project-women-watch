@@ -19,31 +19,34 @@ interface CartState {
 const isClient = typeof window !== "undefined";
 
 const getLocalStorage = isClient
-  ? JSON.parse(localStorage.getItem("cart") || "null") || [] : [];
+  ? JSON.parse(localStorage.getItem("cart") || "null") || []
+  : [];
 
-  const saveLocalStorage = (state: CartState) => {
-    if (isClient) {
-      localStorage.setItem("cart", JSON.stringify(state.items));
-    }
-  };
+const saveLocalStorage = (state: CartState) => {
+  if (isClient) {
+    localStorage.setItem("cart", JSON.stringify(state.items));
+  }
+};
 
 const cartSlice = createSlice({
   name: "cart",
   reducerPath: "cart",
   initialState: { items: getLocalStorage } as CartState,
   reducers: {
-    addToCart(state, action: PayloadAction<CartItem>) {
+    addToCart(state: CartState, action: PayloadAction<CartItem>) {
       const existingItem = state.items.find(
-        (item) =>
-          item.id === action.payload.id && item.color === action.payload.color
+        (item) => item.id === action.payload.id
       );
 
       if (existingItem) {
+        if (existingItem.color !== action.payload.color) {
+          existingItem.color = action.payload.color;
+        }
         existingItem.quantity += action.payload.quantity;
-        existingItem.color = action.payload.color;
       } else {
         state.items.push(action.payload);
       }
+
       toast.success("Đã thêm sản phẩm vào giỏ hàng.");
       saveLocalStorage(state);
     },
@@ -63,17 +66,6 @@ const cartSlice = createSlice({
       );
       saveLocalStorage(state);
     },
-    updateColor(state, action: PayloadAction<{ id: number; color: string }>) {
-      const existingItem = state.items.find(
-        (item) => item.id === action.payload.id
-      );
-
-      if (existingItem) {
-        existingItem.color = action.payload.color;
-      }
-      saveLocalStorage(state);
-    },
-
     clearCart(state) {
       state.items = [];
       saveLocalStorage(state);

@@ -5,6 +5,7 @@ interface FormData {
   password: string;
   name: string;
   number: number;
+  order: number;
 }
 
 const userSlice = createSlice({

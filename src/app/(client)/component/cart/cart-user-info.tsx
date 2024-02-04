@@ -4,26 +4,53 @@ import { userActions } from "@/app/lib/features/user.slide";
 import Link from "next/link";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+
 
 interface FormData {
   email: string;
   password: string;
   name: string;
   number: number;
+  order: number;
+}
+interface CartItem {
+  id: number;
+  thumbnail: string;
+  title: string;
+  price: number;
+  quantity: number;
+}
+
+interface RootState {
+  cart: {
+    items: CartItem[];
+  };
 }
 
 export default function CartUser() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { 
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-    dispatch(userActions.setFormData(data));
+    const useData = {
+      ...data,
+      order: Date.now(),
+    };
+    console.log(useData);
+    dispatch(userActions.setFormData(useData));
+    router.push('/success');
   };
+
+  const cartItems: CartItem[] = useSelector(
+    (state: RootState) => state.cart.items
+  );
+  const totalItem = cartItems.length;
 
   return (
     <div className="w-full">
@@ -75,6 +102,7 @@ export default function CartUser() {
             <button
               className="btn-submit w-full py-5 text-center bg-black text-white"
               type="submit"
+              disabled={totalItem === 0}
             >
               TẠO ĐƠN HÀNG
             </button>

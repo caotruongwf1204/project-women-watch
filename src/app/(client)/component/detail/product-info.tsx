@@ -1,16 +1,15 @@
 "use client";
 
 import { cartActions } from "@/app/lib/features/cart.slide";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
-
 
 export default function ProductInfo({ product }: any) {
   const [quantity, setQuantity] = useState(1);
   const [activeColor, setActiveColor] = useState("");
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     if (product.color.length > 0 && !activeColor) {
       setActiveColor(product.color[0]);
@@ -28,10 +27,7 @@ export default function ProductInfo({ product }: any) {
   };
 
   const handleColorClick = (color: string) => {
-    if (product.color.includes(color)) {
-      setActiveColor(color);
-      dispatch(cartActions.updateColor({ id: product.id, color }));
-    }
+    setActiveColor(color);
   };
 
   const handleAddToCart = () => {
@@ -46,8 +42,6 @@ export default function ProductInfo({ product }: any) {
       })
     );
   };
-
-  
 
   const formattedPrice = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -118,7 +112,9 @@ export default function ProductInfo({ product }: any) {
         <button onClick={handleAddToCart} className="btn-add-to-cart">
           THÊM VÀO GIỎ HÀNG
         </button>
-        <button className="btn-buy-now">MUA NGAY</button>
+        <button onClick={handleAddToCart}>
+          <Link className="block w-full btn-buy-now" href={`/cart`}>MUA NGAY</Link>
+        </button>
       </div>
     </div>
   );
