@@ -43,11 +43,11 @@
 
 @media (max-width: 768px) {
     .cart-products {
-        margin: 0 15px !important;
+        margin: 0px !important;
     }
 
     .cart-user-info {
-        margin: 30px 15px 0 15px !important;
+        margin: 30px 0 0 0!important;
     }
 
     .cart-pruduct-table {
