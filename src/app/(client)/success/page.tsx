@@ -1,4 +1,5 @@
-"use client"
+"use client";
+import Link from "next/link";
 import React from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
@@ -16,7 +17,6 @@ interface RootState {
 }
 
 export default function Success() {
-
   const userData = useSelector((state: RootState) => state.user);
 
   return (
@@ -33,13 +33,15 @@ export default function Success() {
               Bạn đã đặt hàng thành công!
             </div>
             <div className="text-base info-des pt-2 pb-2 pl-0 sm:pl-14">
-              Cảm ơn khách hàng <strong>{userData.name}</strong> đã mua hàng tại website của chúng tôi.
+              Cảm ơn khách hàng <strong>{userData.name}</strong> đã mua hàng tại
+              website của chúng tôi.
             </div>
             <div className="text-base info-des pt-2 pb-2 pl-0 sm:pl-14">
               Mã đơn hàng của bạn là : {userData.order}
             </div>
             <div className="text-base info-des pt-2 pb-2 pl-0 sm:pl-14">
-              <strong>Bộ phận kinh doanh</strong> sẽ liên hệ bạn qua SĐT: {userData.number}
+              <strong>Bộ phận kinh doanh</strong> sẽ liên hệ bạn qua SĐT:{" "}
+              {userData.number}
             </div>
             <div className="text-base info-des pt-2 pb-2 pl-0 sm:pl-14">
               Bạn có thể thực hiện thanh toán để đơn hàng được giao nhanh hơn
@@ -474,14 +476,18 @@ export default function Success() {
           </div>
 
           <div className="flex items-center justify-center md:justify-start">
-            <button className="px-5 py-4 border-2 border-black hover:bg-black hover:text-white transition delay-150 duration-300 ease-in-out">
-              Tiếp tục mua hàng
-            </button>
+            <Link href={`/collection`}>
+              <button className="px-5 py-4 border-2 border-black hover:bg-black hover:text-white transition delay-150 duration-300 ease-in-out">
+                Tiếp tục mua hàng
+              </button>
+            </Link>
           </div>
           <div className="flex items-center justify-center md:justify-end">
-            <button className="flex items-center justify-center px-5 py-4 bg-black text-white">
-              Thanh toán <FaArrowRight />
-            </button>
+            <Link href={`/checkout`}>
+              <button className="flex items-center justify-center px-5 py-4 bg-black text-white">
+                Thanh toán <FaArrowRight />
+              </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,0 +1,42 @@
+.login-input {
+    background-color: transparent;
+    border: 1px solid #ebebeb;
+    color: #333;
+    font-size: 14px;
+    height: 45px;
+    margin-bottom: 10px;
+    padding: 0 15px;
+    outline: none;
+    width: 100%;
+
+}
+
+.province,
+.district,
+.ward {
+    background-color: transparent;
+    border: 1px solid #ebebeb;
+    color: #333;
+    font-size: 14px;
+    height: 45px;
+    margin-bottom: 10px;
+    padding: 0 15px;
+    outline: none;
+    width: 100%;
+}
+
+
+
+@media (max-width: 1024px) {
+    .form-field {
+        margin: 0 !important;
+    }
+    .cart-user-info,
+    .cart-products {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .cart-products {
+        margin-top: 20px !important;
+    }
+}

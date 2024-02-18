@@ -11,11 +11,11 @@ export default function Cart() {
       </div>
 
       <div className="cart-main flex items-center justify-center py-16">
-        <div className="container px-3 flex items-center flex-col md:flex-row justify-center">
+        <div className="container px-3 flex flex-col md:flex-row">
           <div className="cart-products w-full p-3 mr-4">
             <CartProductTable></CartProductTable>
           </div>
-          <div className="cart-user-info w-full p-3 ml-4 flex items-center justify-center">
+          <div className="cart-user-info w-full p-3 ml-4">
             <CartUser></CartUser>
           </div>
         </div>
