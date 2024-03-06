@@ -54,11 +54,6 @@
     visibility: visible;
 }
 
-.navigation> :hover .submenu {
-    transform: rotateX(0deg);
-    visibility: visible;
-}
-
 .nav-logo,
 .nav-icons {
     display: none;
