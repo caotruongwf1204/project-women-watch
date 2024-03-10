@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import FromCheckout from "../component/checkout/from-checkout";
 import "@/app/css/checkout.css";
 import CheckoutProducts from "../component/checkout/checkout-products";
@@ -27,6 +27,9 @@ interface FormData {
   order: number;
   address: string;
 }
+
+
+
 interface CartItem {
   id: number;
   thumbnail: string;
@@ -43,6 +46,7 @@ export default function Checkout() {
   const dispatch = useDispatch();
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const removeCart = () => {
     dispatch(cartActions.clearCart());
@@ -53,9 +57,18 @@ export default function Checkout() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+    formState: { errors, isValid }, // Access form validity
+  } = useForm<FormData>({
+    mode: "onChange", // Validate on change
+  });
+
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    if (isValid) {
+      setIsFormValid(true); // Update form validity state
+      console.log(data);
+      onOpen(); // Open the modal
+    }
+  };
   return (
     <>
       <div className="flex justify-center items-center py-4 bg-gray-100">
@@ -86,7 +99,7 @@ export default function Checkout() {
               <Modal
                 className="bg-slate-950 text-white"
                 backdrop="opaque"
-                isOpen={isOpen}
+                isOpen={isOpen && isFormValid}
                 onOpenChange={onOpenChange}
                 motionProps={{
                   variants: {
