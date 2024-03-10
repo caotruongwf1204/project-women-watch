@@ -57,16 +57,16 @@ export default function Checkout() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid }, // Access form validity
+    formState: { errors, isValid },
   } = useForm<FormData>({
-    mode: "onChange", // Validate on change
+    mode: "onChange",
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     if (isValid) {
-      setIsFormValid(true); // Update form validity state
+      setIsFormValid(true);
       console.log(data);
-      onOpen(); // Open the modal
+      onOpen();
     }
   };
   return (
