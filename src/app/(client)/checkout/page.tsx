@@ -23,8 +23,9 @@ interface FormData {
   email: string;
   password: string;
   name: string;
-  number: number;
+  number: string;
   order: number;
+  address: string;
 }
 interface CartItem {
   id: number;
