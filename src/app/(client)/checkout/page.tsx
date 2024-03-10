@@ -16,6 +16,27 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useSelector } from "react-redux";
+
+interface FormData {
+  email: string;
+  password: string;
+  name: string;
+  number: number;
+  order: number;
+}
+interface CartItem {
+  id: number;
+  thumbnail: string;
+  title: string;
+  price: number;
+  quantity: number;
+}
+
+interface RootState {
+  user: FormData;
+}
 
 export default function Checkout() {
   const dispatch = useDispatch();
@@ -26,6 +47,14 @@ export default function Checkout() {
     dispatch(cartActions.clearCart());
     router.push("/");
   };
+
+  const userData = useSelector((state: RootState) => state.user);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
   return (
     <>
       <div className="flex justify-center items-center py-4 bg-gray-100">
@@ -34,15 +63,19 @@ export default function Checkout() {
 
       <div className="cart-main flex items-center justify-center py-16">
         <div className="container px-3 flex flex-col lg:flex-row justify-between">
-          <div className="cart-user-info shadow-2xl mr-2 p-3">
-            <FromCheckout></FromCheckout>
-          </div>
+          <FromCheckout
+            userData={userData}
+            onSubmit={handleSubmit(onSubmit)}
+            errors={errors}
+            register={register}
+          />
           <div className="cart-products ml-2">
             <div className="shadow-2xl p-3">
               <CheckoutProducts></CheckoutProducts>
             </div>
             <div>
               <Button
+                onClick={handleSubmit(onSubmit)}
                 onPress={onOpen}
                 className="btn-submit w-full py-5 text-center bg-black text-white"
                 type="submit"

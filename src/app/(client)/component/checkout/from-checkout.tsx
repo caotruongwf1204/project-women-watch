@@ -1,42 +1,30 @@
-"use client";
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useSelector } from "react-redux";
 
 interface FormData {
-  email: string;
-  password: string;
   name: string;
-  number: number;
-  order: number;
-}
-interface CartItem {
-  id: number;
-  thumbnail: string;
-  title: string;
-  price: number;
-  quantity: number;
+  number: string;
+  address: string;
 }
 
-interface RootState {
-  user: FormData;
+interface UserInformationFormProps {
+  userData: FormData;
+  onSubmit: any;
+  errors: any;
+  register: any;
 }
 
-export default function CartUser() {
-  const userData = useSelector((state: RootState) => state.user);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
-
+const FromCheckout = ({
+  userData,
+  onSubmit,
+  errors,
+  register,
+}: UserInformationFormProps) => {
   return (
-    <>
+    <div className="cart-user-info shadow-2xl mr-2 p-3">
       <div className="p-5">
         <span className="font-medium">Địa chỉ giao hàng</span>
       </div>
-      <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="login-form" onSubmit={onSubmit}>
         <div className="flex flex-col">
           <div className="form-row flex justify-between mb-4 flex-col lg:flex-row">
             <div className="form-control w-full flex flex-col px-5">
@@ -85,7 +73,7 @@ export default function CartUser() {
           </div>
 
           <div className="form-row flex px-5 mb-4 flex-col lg:flex-row">
-            <div className="form-field mr-2" >
+            <div className="form-field mr-2">
               <label htmlFor="province">Thành phố/Tỉnh</label>
               <select className="province" id="province">
                 <option>Thành phố/Tỉnh</option>
@@ -106,7 +94,6 @@ export default function CartUser() {
           </div>
         </div>
       </form>
-
       <div className="px-5 py-8 mt-10 border-t-2 border-gray-100">
         <span className="font-medium">Phương thức thanh toán</span>
         <div className="flex items-center">
@@ -116,6 +103,8 @@ export default function CartUser() {
           </label>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default FromCheckout;
