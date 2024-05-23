@@ -20,7 +20,7 @@ env:
   DOCKERFILE_PATH: ./Dockerfile
   DOCKER_NETWORK: women-watch
   HOST_PORT: 8080
-  CONTAINER_PORT: 80
+  CONTAINER_PORT: 3000
 
 
 jobs:
