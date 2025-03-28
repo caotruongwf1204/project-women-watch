@@ -1,23 +1,41 @@
-# Use the official Node.js image as a base
-FROM node:20
+# FROM node:20
+# WORKDIR /app
+# COPY package.json package-lock.json ./
 
-# Set the working directory inside the container
+# RUN npm install
+# COPY . .
+# RUN npm run build
+# EXPOSE 3000
+# CMD ["npm", "start"]
+
+FROM node:18-alpine AS base
+
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package.json package-lock.json ./
+RUN apk add --no-cache libc6-compat
 
-# Install dependencies
-RUN npm install
+FROM base AS deps
+COPY package.json yarn.lock* package-lock.json* ./
+RUN yarn install --only=production
 
-# Copy the rest of the application code to the working directory
+# Build Next.js app
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build the Next.js application
-RUN npm run build
+# Build ở chế độ standalone
+RUN yarn build
 
-# Expose the port Next.js will run on
-EXPOSE 3000
+# Final stage: chỉ copy file cần thiết để chạy app
+FROM base AS runner
+WORKDIR /app
 
-# Start the application
-CMD ["npm", "start"]
+# Copy standalone build từ builder
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/node_modules ./node_modules
+
+# Chạy Next.js app
+CMD ["node", "server.js"]
