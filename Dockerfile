@@ -6,7 +6,7 @@ RUN apk add --no-cache libc6-compat
 
 FROM base AS deps
 COPY package.json yarn.lock* package-lock.json* ./
-RUN npm install --only=production
+RUN yarn install --only=production
 
 # Build Next.js app
 FROM base AS builder
@@ -15,7 +15,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build ở chế độ standalone
-RUN npm run build
+RUN yarn build
 
 # Final stage: chỉ copy file cần thiết để chạy app
 FROM base AS runner
