@@ -1,27 +1,38 @@
-# Build stage
-FROM node:18.19.0 AS build
+FROM node:18-alpine AS base
 
 WORKDIR /app
 
-COPY package.json /app/package.json
-COPY yarn.lock /app/yarn.lock
-RUN yarn 
+RUN apk add --no-cache libc6-compat
 
-COPY . /app
+FROM base AS deps
+COPY package.json yarn.lock* package-lock.json* ./
+RUN npm install --only=production
 
-RUN yarn build
+# Build Next.js app
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 
-# Nginx setup
-FROM nginx:alpine
+# Build ở chế độ standalone
+RUN npm run build
 
-# Copy cấu hình nginx
-COPY --from=build /app/nginx/nginx.conf /etc/nginx/conf.d/default.conf
-# COPY --from=build /app/nginx/.htpasswd /etc/nginx/conf.d/.htpasswd
+# Final stage: chỉ copy file cần thiết để chạy app
+FROM base AS runner
+WORKDIR /app
 
-WORKDIR /usr/share/nginx/html
+# Copy standalone build từ builder
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
 
-RUN rm -rf ./*
+# Tạo user không root
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+RUN chown -R nextjs:nodejs /app
 
-COPY --from=build /app/.next .
+# Chạy dưới user không root
+USER nextjs
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# Chạy Next.js app
+CMD ["node", "server.js"]
