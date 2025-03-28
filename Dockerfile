@@ -26,13 +26,5 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 
-# Tạo user không root
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-RUN chown -R nextjs:nodejs /app
-
-# Chạy dưới user không root
-USER nextjs
-
 # Chạy Next.js app
 CMD ["node", "server.js"]
