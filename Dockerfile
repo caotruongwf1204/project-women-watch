@@ -6,7 +6,7 @@ RUN apk add --no-cache libc6-compat
 
 FROM base AS deps
 COPY package.json yarn.lock* package-lock.json* ./
-RUN yarn install --only=production
+RUN yarn install
 
 # Build Next.js app
 FROM base AS builder
