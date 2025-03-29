@@ -3,10 +3,10 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import NextImage from "next/image";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+// import "swiper/css";
+// import "swiper/css/free-mode";
+// import "swiper/css/navigation";
+// import "swiper/css/thumbs";
 import { Navigation, Thumbs } from "swiper/modules";
 import SwiperCore, { Swiper as SwiperType } from "swiper/core";
 
