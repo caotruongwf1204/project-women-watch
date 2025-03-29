@@ -52,6 +52,7 @@ jobs:
         run: |
             ssh -o StrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oStrictHostKeyChecking=no -p $SSH_PORT $SSH_USERNAME@$SSH_HOST <<EOF
               echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+              if [[ "\$(docker images -q $DOCKERHUB_USERNAME/$IMAGE_NAME 2> /dev/null)" != "" ]]; then docker rmi -f $DOCKERHUB_USERNAME/$IMAGE_NAME; fi
               docker pull $DOCKERHUB_USERNAME/$IMAGE_NAME
               if [ "\$(docker ps -q -af name=$CONTAINER_NAME)" ]; then docker rm -f $CONTAINER_NAME; fi
               if [[ ! "\$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then docker rmi -f $IMAGE_NAME; fi
